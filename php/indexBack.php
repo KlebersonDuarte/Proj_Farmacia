@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form id="CADASTRAR" action="" method =''>
+    <form id="CADASTRAR" action="" method ="">
 <label for="NOME">NOME</label>
 <input type="text" name='NOME' id='NOME'><br>
 
@@ -14,23 +14,23 @@
 <input type="text" name='CPF' id='CPF'  minlength="14" maxlength="14"><br>
 
 <label for="EMAIL">EMAIL</label>
-<input type="email" name='EMAIL' id='EMAIL'><br>
+<input type="email" name='EMAILnew' id='EMAILnew'><br>
 
 <label for="SENHA">SENHA</label>
-<input type="password" name='SENHA' id='SENHA'><br>
+<input type="password" name='SENHAnew' id='SENHAnew'><br>
 
-<input type="button" value="Enviar" onclick="fCadastrar()">
+<button type="button" onclick="fCadastrar()">Enviar</button>
 
     </form><br>
 
-        <form id="LOGIN" action="" method =''>
+        <form id="LOGIN" action="" method ="">
 <label for="EMAIL">EMAIL</label>
 <input type="email" name='EMAIL' id='EMAIL'><br>
 
 <label for="SENHA">SENHA</label>
 <input type="password" name='SENHA' id='SENHA'><br>
 
-<input type="button" value="Enviar" onclick="fLogin()">
+<button type="button" onclick="fLogin()">Enviar</button>
 
 </form>
 
@@ -40,7 +40,7 @@ IMask(document.getElementById('CPF'), {
   mask: '000.000.000-00',
 })</script>
 
-<script src="/js/usuario.js"></script>
+<script src="../js/usuario.js"></script>
 </body>
 
 </html>

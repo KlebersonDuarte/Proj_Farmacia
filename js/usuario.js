@@ -3,12 +3,16 @@ async function fCadastrar() {
 
     const DadosCadas = new FormData(CADASTRAR);
 
-  const dados = Object.fromEntries(DadosForm.entries());
+  const dados = Object.fromEntries(DadosCadas.entries());
   dados.acao = "cadastrar";
 
+    if (!dados.NOME || !dados.EMAILnew || !dados.SENHAnew || !dados.CPF) {
+        alert("Preencha todos os campos.");
+        return; 
+    }
 
   try{
-    const Retorno = await fetch("cadastro.php",{
+    const Retorno = await fetch("usuario.php",{
         method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(dados)
@@ -25,16 +29,19 @@ alert(Resposta.msg);
 
 async function fLogin() {
         const LOGIN = document.getElementById("LOGIN");
-
-
          const DadosLogin = new FormData(LOGIN);
 
-  const entrar = Object.fromEntries(DadosForm.entries());
+  const entrar = Object.fromEntries(DadosLogin.entries());
   entrar.acao = "login";
+
+      if (!entrar.EMAIL || !entrar.SENHA) {
+        alert("Preencha todos os campos.");
+        return; 
+    }
 
 
   try {
-    const Retorno = await fetch("login.php",{
+    const Retorno = await fetch("usuario.php",{
         method: "POST",
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(entrar)
