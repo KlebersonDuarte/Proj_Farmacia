@@ -17,6 +17,7 @@ if ($acao === 'cadastrar') {
     $email = trim($data->EMAILnew  ?? '');
     $senha = trim($data->SENHAnew  ?? '');
     $cpf   = trim($data->CPF  ?? '');
+    $senhaConfir = trim($data->SENHArept ?? '');
 
 
     if (
@@ -46,7 +47,13 @@ if ($acao === 'cadastrar') {
     if ($preEmail->num_rows > 0 || $preCPF->num_rows > 0) {
         echo json_encode(['Resposta' => false, 'msg' => "Email ou CPF já cadastrado."]);
         exit;
-    } else {
+    } 
+    
+    else if ($senha != $senhaConfir) {
+        echo json_encode(['Resposta' => false, 'msg' => "Senhas não coenciedem"]);
+    exit;}
+
+    else {
 
         // Criar hash seguro da senha
         $hash = password_hash($senha, PASSWORD_DEFAULT);

@@ -13,11 +13,14 @@
 <label for="CPF">CPF</label>
 <input type="text" name='CPF' id='CPF'  minlength="14" maxlength="14"><br>
 
-<label for="EMAIL">EMAIL</label>
+<label for="EMAILnew">EMAIL</label>
 <input type="email" name='EMAILnew' id='EMAILnew'><br>
 
-<label for="SENHA">SENHA</label>
+<label for="SENHAnew">SENHA</label>
 <input type="password" name='SENHAnew' id='SENHAnew'><br>
+
+<label for="SENHArept">REPITA A SENHA</label>
+<input type="password" name='SENHArept' id='SENHArept'><br>
 
 <button type="button" onclick="fCadastrar()">Enviar</button>
 
