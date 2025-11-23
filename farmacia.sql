@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 22/11/2025 às 17:34
+-- Tempo de geração: 23/11/2025 às 22:14
 -- Versão do servidor: 9.1.0
 -- Versão do PHP: 8.3.14
 
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `tb_produto` (
   `FABRI_PRODUTO` date NOT NULL,
   `VALIDADE_PRODUTO` date NOT NULL,
   PRIMARY KEY (`ID_PRODUTO`)
-) ENGINE=MyISAM AUTO_INCREMENT=360 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=361 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Despejando dados para a tabela `tb_produto`
@@ -450,7 +450,8 @@ INSERT INTO `tb_produto` (`ID_PRODUTO`, `NOME_PRODUTO`, `PRECO_PRODUTO`, `CATEGO
 (356, 'Perfume Floral Citrus', 134.90, 'Perfumes', 'Mistura de flores e frutas cítricas.', '2025-02-06', '2027-02-06'),
 (357, 'Colônia Musk Intenso', 144.90, 'Perfumes', 'Almíscar forte e marcante.', '2025-03-04', '2027-03-04'),
 (358, 'Perfume Especiado Masculino', 149.90, 'Perfumes', 'Notas de especiarias e madeiras.', '2025-01-11', '2027-01-11'),
-(359, 'Colônia Powder Floral', 119.90, 'Perfumes', 'Aroma suave de talco floral.', '2025-03-07', '2027-03-07');
+(359, 'Colônia Powder Floral', 119.90, 'Perfumes', 'Aroma suave de talco floral.', '2025-03-07', '2027-03-07'),
+(360, 'teste', 0.00, 'teste', 'teste de vencimento', '2025-11-01', '2025-11-24');
 
 -- --------------------------------------------------------
 
