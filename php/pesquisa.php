@@ -13,7 +13,7 @@ switch($method){
     $acao = $data["acao"] ?? 'desconhecida';
 
 if($acao === "pesquisar"){
-    $pesquisa = $data["PESQUISAR"] ?? '';
+    $pesquisa = $data["barraP"] ?? '';
     $pesquisa = "%$pesquisa%";
 
     $prePesq = $mysqli->prepare("SELECT * FROM tb_produto WHERE NOME_PRODUTO LIKE ? OR PRECO_PRODUTO LIKE ? OR CATEGORIA_PRODUTO LIKE ? OR DESCRICAO_PRODUTO LIKE ?");

@@ -26,10 +26,10 @@ async function fPesquisar() {
     }
 
     try {
-        const Retorno = await fetch("pesquisa.php", {
+        const Retorno = await fetch("php/pesquisa.php", {
             method: "POST",
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({acao: "pesquisar",PESQUISAR: pesquisa })});
+            body: JSON.stringify({acao: "pesquisar",barraP: pesquisa })});
 
         const Resposta = await Retorno.json();
 
@@ -43,7 +43,11 @@ async function fPesquisar() {
         Resposta.forEach(prod => {
             const item = document.createElement("div");
             item.classList.add("sug-item");
-            item.textContent = prod.NOME_PRODUTO;
+            item.innerHTML = `
+    <strong>${prod.NOME_PRODUTO}</strong><br>
+    R$ ${prod.PRECO_PRODUTO} | ${prod.CATEGORIA_PRODUTO}<br>
+    <small>${prod.DESCRICAO_PRODUTO}</small>
+`;
 
             // Quando clicar → coloca no input
             item.addEventListener("click", () => {

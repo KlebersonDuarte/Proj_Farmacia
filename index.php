@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/inicio.css">
-    <script src = "./inicio.js"></script> 
     <title>Framácia</title>
 </head>
 <body>
@@ -93,7 +92,7 @@ if (isset($_SESSION['name'])) {
             </div>
             
             <div class="INDEsocorros.php">
-                <a href="socorros">
+                <a href="socorros.php">
                 <img src="img/INDEsocorros.jpeg" alt="">
                 </a>
                 <p>Primeiros socorros</p>
