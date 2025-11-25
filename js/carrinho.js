@@ -1,7 +1,7 @@
 // Carregar produtos do banco
 async function fCarregarProdutos() {
     try {
-        const Retorno = await fetch("carrinho.php", {
+        const Retorno = await fetch("php/carrinho.php", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({ acao: "listarProdutos" })
@@ -50,7 +50,7 @@ async function fCarregarProdutos() {
 // Adicionar produto ao carrinho
 async function fAdicionarAoCarrinho(idProduto) {
     try {
-        const Retorno = await fetch("carrinho.php", {
+        const Retorno = await fetch("php/carrinho.php", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
@@ -77,13 +77,17 @@ async function fAdicionarAoCarrinho(idProduto) {
     }
 }
 
-// Mostrar carrinho
+// Mostrar carrinho (pop-up)
 async function fMostrarCarrinho() {
     const modal = document.getElementById("carrinhoModal");
+    if (!modal) {
+        console.error("Modal do carrinho não encontrado");
+        return;
+    }
     modal.style.display = "block";
     
     try {
-        const Retorno = await fetch("carrinho.php", {
+        const Retorno = await fetch("php/carrinho.php", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({ acao: "listar" })
@@ -96,7 +100,7 @@ async function fMostrarCarrinho() {
             let total = 0;
 
             if (Resposta.itens.length === 0) {
-                container.innerHTML = "<p class='carrinho-vazio'>Carrinho vazio</p>";
+                container.innerHTML = "<p style='text-align: center; padding: 20px; color: #999;'>Carrinho vazio</p>";
                 document.getElementById("totalCarrinho").textContent = "0.00";
                 return;
             }
@@ -105,23 +109,24 @@ async function fMostrarCarrinho() {
             
             Resposta.itens.forEach(item => {
                 const itemDiv = document.createElement("div");
-                itemDiv.className = "item-carrinho";
+                itemDiv.className = "historico-item";
+                itemDiv.style.marginBottom = "15px";
                 itemDiv.innerHTML = `
-                    <div class="item-info">
-                        <h4>${item.NOME_PRODUTO}</h4>
-                        <p class="item-categoria">${item.CATEGORIA_PRODUTO}</p>
-                        <p class="item-preco-unit">R$ ${parseFloat(item.PRECO_UNITARIO).toFixed(2)} cada</p>
-                    </div>
-                    <div class="item-controles">
-                        <div class="quantidade-controle">
-                            <button type="button" onclick="fAtualizarQuantidade(${item.ID_ITEM_CARRINHO}, ${item.QUANTIDADE_ITEM - 1})" class="btn-qtd">-</button>
-                            <span class="qtd-valor">${item.QUANTIDADE_ITEM}</span>
-                            <button type="button" onclick="fAtualizarQuantidade(${item.ID_ITEM_CARRINHO}, ${item.QUANTIDADE_ITEM + 1})" class="btn-qtd">+</button>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <div>
+                            <strong>${item.NOME_PRODUTO}</strong>
+                            <p style="margin: 5px 0; color: #666; font-size: 14px;">${item.CATEGORIA_PRODUTO}</p>
+                            <p style="margin: 5px 0; color: #667eea; font-size: 14px;">R$ ${parseFloat(item.PRECO_UNITARIO).toFixed(2)} cada</p>
                         </div>
-                        <div class="item-total">
-                            <strong>R$ ${parseFloat(item.TOTAL_ITEM).toFixed(2)}</strong>
+                        <div style="text-align: right;">
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                                <button type="button" onclick="fAtualizarQuantidade(${item.ID_ITEM_CARRINHO}, ${item.QUANTIDADE_ITEM - 1})" style="padding: 5px 10px; border: 1px solid #ddd; background: white; cursor: pointer; border-radius: 5px;">-</button>
+                                <span style="min-width: 30px; text-align: center;">${item.QUANTIDADE_ITEM}</span>
+                                <button type="button" onclick="fAtualizarQuantidade(${item.ID_ITEM_CARRINHO}, ${item.QUANTIDADE_ITEM + 1})" style="padding: 5px 10px; border: 1px solid #ddd; background: white; cursor: pointer; border-radius: 5px;">+</button>
+                            </div>
+                            <strong style="color: #667eea; font-size: 16px;">R$ ${parseFloat(item.TOTAL_ITEM).toFixed(2)}</strong>
+                            <button type="button" onclick="fRemoverItem(${item.ID_ITEM_CARRINHO})" style="margin-top: 5px; padding: 5px 10px; background: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 12px;">Remover</button>
                         </div>
-                        <button type="button" onclick="fRemoverItem(${item.ID_ITEM_CARRINHO})" class="btn-remover">Remover</button>
                     </div>
                 `;
                 container.appendChild(itemDiv);
@@ -151,7 +156,7 @@ async function fAtualizarQuantidade(idItem, novaQuantidade) {
     }
 
     try {
-        const Retorno = await fetch("carrinho.php", {
+        const Retorno = await fetch("php/carrinho.php", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
@@ -181,7 +186,7 @@ async function fRemoverItem(idItem) {
     }
 
     try {
-        const Retorno = await fetch("carrinho.php", {
+        const Retorno = await fetch("php/carrinho.php", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
@@ -205,12 +210,37 @@ async function fRemoverItem(idItem) {
 }
 
 async function fPagar() {
+    // Verificar se está logado
+    try {
+        const RetornoSessao = await fetch("php/usuario.php", {
+            method: "GET",
+            headers: {'Content-Type': 'application/json'}
+        });
+        
+        const RespostaSessao = await RetornoSessao.json();
+        
+        if (!RespostaSessao.Resposta || !RespostaSessao.logado) {
+            alert("Você precisa estar logado para finalizar a compra.\n\nPor favor, faça login primeiro.");
+            // Redirecionar para index ou abrir modal de login
+            if (typeof fAbrirModalLogin === 'function') {
+                fAbrirModalLogin();
+            } else {
+                window.location.href = "index.php";
+            }
+            return;
+        }
+    } catch (error) {
+        console.error("Erro ao verificar sessão:", error);
+        alert("Erro ao verificar autenticação. Por favor, tente novamente.");
+        return;
+    }
+
     if (!confirm("Deseja finalizar a compra?")) {
         return;
     }
 
     try {
-        const Retorno = await fetch("carrinho.php", {
+        const Retorno = await fetch("php/carrinho.php", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({ acao: "pagar" })

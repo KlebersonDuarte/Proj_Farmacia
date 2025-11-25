@@ -114,10 +114,13 @@ else if ($acao === "deslogar") {
         );
     }
 
-  unset($_SESSION['ID_USUARIO']);
-    unset($_SESSION['NOME_USUARIO']);
+    unset($_SESSION['user']);
+    unset($_SESSION['name']);
+    unset($_SESSION['id_carrinho']);
 
-    echo json_encode(['Resposta' => true,'msg' => "adeus",'redirecionamento' => "index.php"]);
+    session_destroy();
+
+    echo json_encode(['Resposta' => true,'msg' => "Logout realizado com sucesso",'redirecionamento' => "index.php"]);
 
     exit;
 }
@@ -131,7 +134,38 @@ else {
 break;
 
 case "GET":
-    echo json_encode(['Resposta' => false, 'msg' => "O sistema não suporta GET"]); 
+    // Verificar sessão
+    if (isset($_SESSION['user'])) {
+        $idUsuario = $_SESSION['user'];
+        $nomeUsuario = $_SESSION['name'] ?? '';
+        
+        // Verificar se é admin (email específico)
+        $preAdmin = $mysqli->prepare("SELECT EMAIL_USUARIO FROM tb_usuario WHERE ID_USUARIO = ?");
+        $preAdmin->bind_param("i", $idUsuario);
+        $preAdmin->execute();
+        $resultAdmin = $preAdmin->get_result();
+        
+        $isAdmin = false;
+        if ($resultAdmin && $resultAdmin->num_rows === 1) {
+            $userData = $resultAdmin->fetch_assoc();
+            if ($userData['EMAIL_USUARIO'] === 'admpatriotafoda@gmail.com') {
+                $isAdmin = true;
+            }
+        }
+        
+        echo json_encode([
+            'Resposta' => true,
+            'logado' => true,
+            'ID_USUARIO' => $idUsuario,
+            'NOME_USUARIO' => $nomeUsuario,
+            'isAdmin' => $isAdmin
+        ]);
+    } else {
+        echo json_encode([
+            'Resposta' => true,
+            'logado' => false
+        ]);
+    }
     break;
 
 default:

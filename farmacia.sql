@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 25/11/2025 às 01:52
+-- Tempo de geração: 25/11/2025 às 23:24
 -- Versão do servidor: 9.1.0
 -- Versão do PHP: 8.3.14
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `tb_carrinho` (
   `ID_USUARIO` int NOT NULL,
   `CRIADO_CARRINHO` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID_CARRINHO`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Despejando dados para a tabela `tb_carrinho`
@@ -41,7 +41,9 @@ CREATE TABLE IF NOT EXISTS `tb_carrinho` (
 
 INSERT INTO `tb_carrinho` (`ID_CARRINHO`, `ID_USUARIO`, `CRIADO_CARRINHO`) VALUES
 (1, 0, '2025-11-22 16:36:44'),
-(2, 0, '2025-11-25 01:30:36');
+(2, 0, '2025-11-25 01:30:36'),
+(3, 2, '2025-11-25 22:42:29'),
+(5, 0, '2025-11-25 23:08:24');
 
 -- --------------------------------------------------------
 
@@ -61,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `tb_item_carrinho` (
   PRIMARY KEY (`ID_ITEM_CARRINHO`),
   KEY `ID_CARRINHO` (`ID_CARRINHO`),
   KEY `ID_PRODUTO` (`ID_PRODUTO`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Despejando dados para a tabela `tb_item_carrinho`
@@ -69,7 +71,8 @@ CREATE TABLE IF NOT EXISTS `tb_item_carrinho` (
 
 INSERT INTO `tb_item_carrinho` (`ID_ITEM_CARRINHO`, `ID_CARRINHO`, `ID_PRODUTO`, `QUANTIDADE_ITEM`, `PRECO_UNITARIO`, `TOTAL_ITEM`, `ADICIONADO_EM`) VALUES
 (3, 1, 3, 1, 16.99, 16.99, '2025-11-22 16:41:44'),
-(8, 2, 2, 1, 8.50, 8.50, '2025-11-25 01:47:18');
+(8, 2, 2, 1, 8.50, 8.50, '2025-11-25 01:47:18'),
+(12, 5, 3, 1, 16.99, 16.99, '2025-11-25 23:08:24');
 
 -- --------------------------------------------------------
 
@@ -84,7 +87,15 @@ CREATE TABLE IF NOT EXISTS `tb_pedido` (
   `TOTAL_PEDIDO` decimal(10,2) DEFAULT NULL,
   `DATA_PEDIDO` datetime DEFAULT NULL,
   PRIMARY KEY (`ID_PEDIDO`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Despejando dados para a tabela `tb_pedido`
+--
+
+INSERT INTO `tb_pedido` (`ID_PEDIDO`, `ID_USUARIO`, `TOTAL_PEDIDO`, `DATA_PEDIDO`) VALUES
+(1, 2, 38.30, '2025-11-25 20:06:48'),
+(2, 4, 58.00, '2025-11-25 20:11:53');
 
 -- --------------------------------------------------------
 
@@ -101,7 +112,17 @@ CREATE TABLE IF NOT EXISTS `tb_pedido_item` (
   `PRECO_UNITARIO` decimal(10,2) DEFAULT NULL,
   `TOTAL_ITEM` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`ID_PEDIDO_ITEM`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Despejando dados para a tabela `tb_pedido_item`
+--
+
+INSERT INTO `tb_pedido_item` (`ID_PEDIDO_ITEM`, `ID_PEDIDO`, `ID_PRODUTO`, `QUANTIDADE_ITEM`, `PRECO_UNITARIO`, `TOTAL_ITEM`) VALUES
+(1, 1, 1, 2, 12.90, 25.80),
+(2, 1, 302, 1, 12.50, 12.50),
+(3, 2, 93, 1, 48.60, 48.60),
+(4, 2, 191, 2, 4.70, 9.40);
 
 -- --------------------------------------------------------
 
@@ -485,7 +506,7 @@ CREATE TABLE IF NOT EXISTS `tb_usuario` (
   PRIMARY KEY (`ID_USUARIO`),
   UNIQUE KEY `EMAIL_USUARIO` (`EMAIL_USUARIO`),
   UNIQUE KEY `CPF_USUARIO` (`CPF_USUARIO`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Despejando dados para a tabela `tb_usuario`
@@ -494,7 +515,8 @@ CREATE TABLE IF NOT EXISTS `tb_usuario` (
 INSERT INTO `tb_usuario` (`ID_USUARIO`, `NOME_USUARIO`, `EMAIL_USUARIO`, `SENHA_USUARIO`, `CRIADO_USUARIO`, `CPF_USUARIO`) VALUES
 (1, 'Kleber', 'klebersonduartesantos39@gmail.com', '$2y$10$mbS/.jtnWQM8x4LnjC9XKuiK3uZWN39JYs90PfUH/YcNiXV.XNPuy', '2025-11-20 18:40:48', '846.068.046-04'),
 (2, 'Adm', 'admpatriotafoda@gmail.com', '$2y$10$XEzb3mOfbBl87V8OPQEbQOcqlGgQ/.7DQuo3Y0ghdK1twXDv.ov.S', '2025-11-20 23:09:06', '044.148.495-45'),
-(3, 'Igor', 'igor@gmail.com', '$2y$10$H1LQn.DvXm/1bSw/ggeShuBasELJ4CCTTr/UovRst6.LWvR19CERC', '2025-11-20 23:15:30', '508.498.440-40');
+(3, 'Igor', 'igor@gmail.com', '$2y$10$H1LQn.DvXm/1bSw/ggeShuBasELJ4CCTTr/UovRst6.LWvR19CERC', '2025-11-20 23:15:30', '508.498.440-40'),
+(4, 'Marcos', 'marcos@gmail.com', '$2y$10$hQuhlKD4hrNXlvDtrVna/OF6AbPYOcmzkcTFhu..YbeNzwKpycCGe', '2025-11-25 23:11:18', 'admpatriotafod');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

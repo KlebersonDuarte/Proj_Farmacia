@@ -1,64 +1,5 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/produto.css">
-    <script src="./produto.js"></script>
-
-    <title>Farmácia - Produtos</title>
-</head>
-<body>
-
-    <!-- HEADER -->
-    <header class="topo">
-        <div class="nome">
-            <a href="index.php"><h1><></h1></a>
-        </div>
-
-        <div class="pesquisa">
-            <div class="CaixaP">
-                <input name="barraP" type="text" id="barraP" autocomplete="off" placeholder="pesquisa">
-                <div class="lupa">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </div>
-            </div>
-        </div>
-
-        <div class="login">
-            <a href="login.php">
-                <i class="fa-solid fa-user"></i>
-            </a>
-        </div>
-
-        <div class="carrinho">
-            <a href="carrinho.php"><i class="fa-solid fa-cart-shopping"></i></a>
-        </div>
-    </header>
-
-    <input type="checkbox" id="menu-toggle">
-    <label for="menu-toggle" class="menu-btn">
-        <span></span>
-        <span></span>
-        <span></span>
-    </label>
-
-    <div class="slide-menu">
-        <ul>
-            <li><a href="index.php">Início</a></li>
-            <li><a href="bebes.php">Produtos para bebês</a></li>
-            <li><a href="cosmedicos.php">Cosmédicos</a></li>
-            <li><a href="descontos.php">Descontos</a></li>
-            <li><a href="equipamentos.php">Equipamentos médicos</a></li>
-            <li><a href="higiene.php">Higiene</a></li>
-            <li><a href="perfumes.php">Perfumes</a></li>
-            <li><a href="remedios.php">Remédios</a></li>
-            <li><a href="saudesex.php">Saúde sexual</a></li>
-            <li><a href="socorros.php">Primeiros socorros</a></li>
-            <li><a href="vitaminas.php">Vitaminas e minerais</a></li>
-        </ul>
-    </div>
+<?php $pageTitle = 'Farmácia - Remédios'; include 'header.php'; ?>
+<?php include 'menu-lateral.php'; ?>
 
     <!-- MAIN: produtos -->
     <main>
@@ -368,5 +309,4 @@
         </div>
     </main>
 
-</body>
-</html>
+<?php include 'footer.php'; ?>

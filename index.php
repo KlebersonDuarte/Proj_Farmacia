@@ -1,56 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/inicio.css">
-    <script src = "./inicio.js"></script> 
-    <title>Farmácia</title>
-</head>
-<body>
+<?php $pageTitle = 'Farmácia - Sua Saúde em Primeiro Lugar'; include 'header.php'; ?>
 
-    <!--               HEADER              -->
-    <header class="topo">
-            <!-- nome da farmacia -->
-                <div class= "nome">
-                    <h1><></h1>
-                </div>
-            <!--barra de pesquisa-->
-
-                <div class= "pesquisa">
-                      
-
-                        <div class="CaixaP">
-                            
-                            <input  namw="barraP" type="text" id="barraP" autocomlete="off" placeholder="pesquisa">
-                            <div class="lupa">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </div>
-                        </div>
-                </div>
-
-                <div class="login">
-                    <a href="login.php">   
-                     <i class="fa-solid fa-user"></i>
-                    </a>
-                </div>
-
-
-                
-          <!-- carrinho -->
-            <div class= "carrinho">
-             <a href="carrinho.php"><i class="fa-solid fa-cart-shopping"></i>
+    <!-- Modal de Login/Cadastro -->
+    <div id="modalLogin" class="modal-login">
+        <div class="modal-content-login">
+            <span class="close-modal" onclick="fFecharModal()">&times;</span>
+            <div class="tabs-login">
+                <button class="tab-btn active" onclick="fTrocarTab('login')">Login</button>
+                <button class="tab-btn" onclick="fTrocarTab('cadastro')">Cadastro</button>
             </div>
+            
+            <!-- Formulário de Login -->
+            <form id="LOGIN" class="form-tab active" onsubmit="event.preventDefault(); fLogin();">
+                <h2>Entrar</h2>
+                <div class="input-group">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="email" name="EMAIL" placeholder="Email" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" name="SENHA" placeholder="Senha" required>
+                </div>
+                <button type="submit" class="btn-submit">Entrar</button>
+            </form>
+            
+            <!-- Formulário de Cadastro -->
+            <form id="CADASTRAR" class="form-tab" onsubmit="event.preventDefault(); fCadastrar();">
+                <h2>Cadastrar</h2>
+                <div class="input-group">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" name="NOME" placeholder="Nome completo" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="email" name="EMAILnew" placeholder="Email" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-id-card"></i>
+                    <input type="text" name="CPF" placeholder="CPF (000.000.000-00)" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" name="SENHAnew" placeholder="Senha" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" name="SENHArept" placeholder="Confirmar senha" required>
+                </div>
+                <button type="submit" class="btn-submit">Cadastrar</button>
+            </form>
+        </div>
+    </div>
 
+    <!-- Modal de Histórico de Compras -->
+    <div id="modalHistorico" class="modal-login">
+        <div class="modal-content-login">
+            <span class="close-modal" onclick="fFecharHistorico()">&times;</span>
+            <h2>Histórico de Compras</h2>
+            <div id="historicoConteudo" class="historico-conteudo">
+                <p>Carregando...</p>
+            </div>
+        </div>
+    </div>
 
-                
-
-
-    </header>
 
     <!--                  MAIN              -->
     <main>
+        <div class="banner-principal">
+            <h2>Bem-vindo à HealthFarms</h2>
+            <p>Sua saúde é nossa prioridade</p>
+        </div>
 
         <div class="INDEimagens">
 
@@ -82,8 +100,8 @@
                 <p>Produtos para bebês</p>
             </div>
             
-            <div class="INDEsocorros.php">
-                <a href="socorros">
+            <div class="INDEsocorros">
+                <a href="socorros.php">
                 <img src="img/INDEsocorros.jpeg" alt="">
                 </a>
                 <p>Primeiros socorros</p>
@@ -126,6 +144,4 @@
 
     </main>
 
-    <!--                 FOOTER             -->
-</body>
-</html>
+<?php include 'footer.php'; ?>

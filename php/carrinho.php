@@ -36,30 +36,43 @@ else if ($acao === "adicionar") {
 
         $idProduto = $data->ID_PRODUTO ?? 0;
         $qtd = $data->QUANTIDADE ?? 1;
+        
+        // ID do usuário (0 se não logado)
+        $idUsuario = isset($_SESSION['user']) ? $_SESSION['user'] : 0;
 
-        // Usar sessão para identificar carrinho (sem login)
+        // Usar sessão para identificar carrinho
         // Se não tem carrinho na sessão, criar um novo
         if (!isset($_SESSION['id_carrinho'])) {
-            // Criar novo carrinho com ID_USUARIO = 0 (usuário não logado)
-            $pre2 = $mysqli->prepare("INSERT INTO tb_carrinho (ID_USUARIO) VALUES (0)");
+            // Criar novo carrinho
+            $pre2 = $mysqli->prepare("INSERT INTO tb_carrinho (ID_USUARIO) VALUES (?)");
+            $pre2->bind_param("i", $idUsuario);
             $pre2->execute();
             $idCarrinho = $pre2->insert_id;
             $_SESSION['id_carrinho'] = $idCarrinho;
         } else {
             $idCarrinho = $_SESSION['id_carrinho'];
             
-            // Verificar se o carrinho ainda existe
-            $preCheck = $mysqli->prepare("SELECT ID_CARRINHO FROM tb_carrinho WHERE ID_CARRINHO = ?");
+            // Verificar se o carrinho ainda existe e atualizar ID_USUARIO se necessário
+            $preCheck = $mysqli->prepare("SELECT ID_CARRINHO, ID_USUARIO FROM tb_carrinho WHERE ID_CARRINHO = ?");
             $preCheck->bind_param("i", $idCarrinho);
             $preCheck->execute();
-            $preCheck->store_result();
+            $resultCheck = $preCheck->get_result();
             
-            if ($preCheck->num_rows === 0) {
+            if ($resultCheck->num_rows === 0) {
                 // Carrinho foi deletado, criar novo
-                $pre2 = $mysqli->prepare("INSERT INTO tb_carrinho (ID_USUARIO) VALUES (0)");
+                $pre2 = $mysqli->prepare("INSERT INTO tb_carrinho (ID_USUARIO) VALUES (?)");
+                $pre2->bind_param("i", $idUsuario);
                 $pre2->execute();
                 $idCarrinho = $pre2->insert_id;
                 $_SESSION['id_carrinho'] = $idCarrinho;
+            } else {
+                // Atualizar ID_USUARIO se o usuário fez login
+                $carrinhoData = $resultCheck->fetch_assoc();
+                if ($carrinhoData['ID_USUARIO'] == 0 && $idUsuario > 0) {
+                    $preUpdate = $mysqli->prepare("UPDATE tb_carrinho SET ID_USUARIO = ? WHERE ID_CARRINHO = ?");
+                    $preUpdate->bind_param("ii", $idUsuario, $idCarrinho);
+                    $preUpdate->execute();
+                }
             }
         }
 
@@ -183,7 +196,19 @@ else if ($acao === "remover") {
 // PAGAR / FINALIZAR COMPRA
 else if ($acao === "pagar") {
 
+    // Verificar se o usuário está logado
+    if (!isset($_SESSION['user'])) {
+        echo json_encode(['Resposta' => false, 'msg' => "Você precisa estar logado para finalizar a compra"]);
+        exit;
+    }
+
+    if (!isset($_SESSION['id_carrinho'])) {
+        echo json_encode(['Resposta' => false, 'msg' => "Carrinho vazio"]);
+        exit;
+    }
+
     $idCarrinho = $_SESSION['id_carrinho'];
+    $idUsuario = $_SESSION['user'];
 
     // 1. Buscar itens do carrinho
     $it = $mysqli->prepare("SELECT ID_ITEM_CARRINHO, ID_PRODUTO, QUANTIDADE_ITEM, PRECO_UNITARIO, TOTAL_ITEM FROM tb_item_carrinho WHERE ID_CARRINHO = ?");
@@ -205,9 +230,9 @@ else if ($acao === "pagar") {
         $itens[] = $row;
     }
 
-    // 2. Criar o pedido (ID_USUARIO = 0 para visitante)
-    $prep = $mysqli->prepare("INSERT INTO tb_pedido (ID_USUARIO, TOTAL_PEDIDO, DATA_PEDIDO) VALUES (0, ?, NOW())");
-    $prep->bind_param("d", $totalCompra);
+    // 2. Criar o pedido com ID do usuário logado
+    $prep = $mysqli->prepare("INSERT INTO tb_pedido (ID_USUARIO, TOTAL_PEDIDO, DATA_PEDIDO) VALUES (?, ?, NOW())");
+    $prep->bind_param("id", $idUsuario, $totalCompra);
     $prep->execute();
 
     $idPedido = $prep->insert_id;

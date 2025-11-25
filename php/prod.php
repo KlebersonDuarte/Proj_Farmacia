@@ -67,12 +67,10 @@ else if($acao === "renovar"){
 
     $hoje = date("Y-m-d");
 
-
     $tempo = $mysqli->prepare("SELECT ID_PRODUTO, NOME_PRODUTO, VALIDADE_PRODUTO FROM tb_produto WHERE VALIDADE_PRODUTO < ?");
     $tempo->bind_param("s", $hoje);
     $tempo->execute();
     $resultado = $tempo->get_result();
-
 
     if($resultado->num_rows === 0){
         echo json_encode(["Resposta" => false, "msg" => "Nenhum produto vencido encontrado."]);
@@ -85,23 +83,36 @@ else if($acao === "renovar"){
     }
 
     $update = $mysqli->prepare("UPDATE tb_produto SET VALIDADE_PRODUTO = ? WHERE ID_PRODUTO = ?");
+    $produtosRenovados = [];
 
-    foreach($produtos as &$p){
+    foreach($produtos as $p){
         $novaValidade = date("Y-m-d", strtotime($p["VALIDADE_PRODUTO"]." +1 year"));
         $update->bind_param("si", $novaValidade, $p["ID_PRODUTO"]);
-        $update->execute();
-
-        $p["NOVA_VALIDADE"] = $novaValidade;
+        
+        if($update->execute()){
+            $produtosRenovados[] = [
+                "ID_PRODUTO" => $p["ID_PRODUTO"],
+                "NOME_PRODUTO" => $p["NOME_PRODUTO"],
+                "VALIDADE_ANTIGA" => $p["VALIDADE_PRODUTO"],
+                "NOVA_VALIDADE" => $novaValidade
+            ];
+        }
     }
 
-        echo json_encode(["Resposta" => true,"msg" => $produtos]);
+    $update->close();
+    
+    if(count($produtosRenovados) > 0){
+        echo json_encode(["Resposta" => true, "msg" => $produtosRenovados]);
+    } else {
+        echo json_encode(["Resposta" => false, "msg" => "Erro ao renovar produtos."]);
+    }
     exit;
 }
 else{
-                echo json_encode(['Resposta' => false, 'msg' => "Falha ao cadastrar"]); 
-                exit;
-    }
-        break;
+    echo json_encode(['Resposta' => false, 'msg' => "Ação desconhecida: " . $acao]); 
+    exit;
+}
+break;
 
     case "GET":
     echo json_encode(['Resposta' => false, 'msg' => "O sistema não suporta GET"]); 
