@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/inicio.css">
-    <title>Framácia</title>
+    <script src = "./inicio.js"></script> 
+    <title>Farmácia</title>
 </head>
 <body>
 
@@ -17,39 +19,28 @@
             <!--barra de pesquisa-->
 
                 <div class= "pesquisa">
-                        <div class="iconeP">
-                            
-
-                        </div>
+                      
 
                         <div class="CaixaP">
                             
-                            <input   type="text" name="barraP" id="barraP"  placeholder="pesquisa">
-                            <div id="sugestoes" class="sugestoes"></div>
-
+                            <input  namw="barraP" type="text" id="barraP" autocomlete="off" placeholder="pesquisa">
+                            <div class="lupa">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </div>
                         </div>
                 </div>
 
                 <div class="login">
-<?php
-session_start();
-
-if (isset($_SESSION['name'])) {
-    echo '<a href="login.php"><p>' . htmlspecialchars($_SESSION['name']) . '</p></a>';
-
-} else {
-    echo '<a href="login.php"><p>Login</p></a>';
-}
-?>
-
-<button type="button" onclick="fDeslogar()"> </button>
+                    <a href="login.php">   
+                     <i class="fa-solid fa-user"></i>
+                    </a>
                 </div>
 
 
                 
           <!-- carrinho -->
             <div class= "carrinho">
-                <a href=""></a>
+             <a href="carrinho.php"><i class="fa-solid fa-cart-shopping"></i>
             </div>
 
 
@@ -74,7 +65,7 @@ if (isset($_SESSION['name'])) {
                 <a href="cosmedicos.php">
                     <img src="img/INDEcreme.jpeg" alt="">
                 </a>
-                <p>Cosmédos</p>
+                <p>Cosmédicos</p>
             </div>
             
             <div class="INDEhigiene">
@@ -92,7 +83,7 @@ if (isset($_SESSION['name'])) {
             </div>
             
             <div class="INDEsocorros.php">
-                <a href="socorros.php">
+                <a href="socorros">
                 <img src="img/INDEsocorros.jpeg" alt="">
                 </a>
                 <p>Primeiros socorros</p>
@@ -125,13 +116,6 @@ if (isset($_SESSION['name'])) {
                 </a>
                 <p>Perfumes</p>
             </div>
-            
-            <div class="INDEdescontos">
-                <a href="descontos.php">
-                <img src="img/INDEdescontos.jpeg" alt="">
-                </a>
-                <p>Descontos</p>
-            </div>
 
       
 
@@ -140,13 +124,8 @@ if (isset($_SESSION['name'])) {
 
 
 
-
-
     </main>
 
     <!--                 FOOTER             -->
-
-<script src="js/pesquisa.js"></script>
-<script src="js/usuario.js"></script>
 </body>
 </html>

@@ -1,0 +1,286 @@
+/* Modal básico para login/cadastro (movido de login.php)
+   Usa a paleta de `css/inicio.css`: fundo de topo `#c5fafa` e cor primária `#00bfff`. */
+:root{
+	--primary: #00bfff; /* cor principal (hover/links) */
+	--accent-bg: #c5fafa; /* cor de destaque de topo */
+	--muted: #f6f6f6;
+	--text: #000000;
+}
+
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); display: none; align-items: center; justify-content: center; z-index: 9999; }
+.modal-box { background: #fff; width: 94%; max-width: 520px; border-radius: 8px; box-shadow: 0 8px 30px rgba(0,0,0,0.12); overflow: hidden; }
+.modal-header { background: var(--accent-bg); color: var(--text); padding: 14px 16px; display:flex; justify-content:space-between; align-items:center }
+.modal-body { padding: 18px; }
+.modal-footer { padding: 12px 16px; text-align: right; background:var(--muted) }
+.tabs { display:flex; gap:8px; margin-bottom:12px }
+.tab-btn { flex:1; padding:10px; border:1px solid #ddd; background:#fafafa; cursor:pointer; text-align:center; border-radius:6px; color:var(--text) }
+.tab-btn.active { background: var(--primary); color:#fff; border-color: var(--primary) }
+label{display:block;margin-top:10px;font-size:14px;color:var(--text)}
+input{width:100%;padding:8px;margin-top:6px;border:1px solid #ccc;border-radius:4px}
+.actions{display:flex;gap:8px;justify-content:flex-end}
+.btn{padding:10px 14px;border-radius:6px;border:none;cursor:pointer}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-secondary{background:#e6e6e6}
+.open-login{position:fixed;right:20px;bottom:20px;padding:12px 16px;border-radius:999px;background:var(--primary);color:#fff;border:none;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,0.12)}
+.close-x{background:none;border:none;color:var(--text);font-size:20px;cursor:pointer}
+
+/* Alinhar login e carrinho lado a lado */
+.topo .login,
+.topo .carrinho {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.topo .carrinho a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: var(--text);
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.topo .carrinho a:hover {
+    transform: scale(1.2);
+    color: var(--primary);
+}
+
+/* Estilos do Modal do Carrinho */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 50px auto;
+    padding: 0;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-header {
+    padding: 20px;
+    background-color: var(--accent-bg);
+    color: var(--text);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px 8px 0 0;
+}
+
+.modal-header h2 {
+    margin: 0;
+}
+
+.btn-fechar {
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 28px;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.btn-fechar:hover {
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 50%;
+}
+
+.itens-carrinho {
+    padding: 20px;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.carrinho-vazio {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+    font-size: 18px;
+}
+
+.item-carrinho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    gap: 20px;
+}
+
+.item-carrinho:last-child {
+    border-bottom: none;
+}
+
+.item-info {
+    flex-grow: 1;
+}
+
+.item-info h4 {
+    margin: 0 0 5px 0;
+    color: #333;
+}
+
+.item-categoria {
+    color: #666;
+    font-size: 12px;
+    margin: 0 0 5px 0;
+}
+
+.item-preco-unit {
+    color: #666;
+    font-size: 14px;
+    margin: 0;
+}
+
+.item-controles {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.quantidade-controle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.btn-qtd {
+    background-color: #f0f0f0;
+    border: none;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 18px;
+}
+
+.btn-qtd:hover {
+    background-color: #e0e0e0;
+}
+
+.qtd-valor {
+    min-width: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.item-total {
+    min-width: 100px;
+    text-align: right;
+    color: var(--primary);
+    font-size: 18px;
+}
+
+.btn-remover {
+    padding: 8px 15px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-remover:hover {
+    background-color: #c82333;
+}
+
+.carrinho-footer {
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-top: 2px solid #e0e0e0;
+    border-radius: 0 0 8px 8px;
+}
+
+.total {
+    text-align: right;
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.botoes-carrinho {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btn-continuar {
+    padding: 12px 30px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.btn-continuar:hover {
+    background-color: #0099cc;
+}
+
+.btn-pagar {
+    padding: 12px 30px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.btn-pagar:hover {
+    background-color: #0099cc;
+}
+
+@media (max-width: 768px) {
+    .item-carrinho {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .item-controles {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+.btn-adicionar {
+    padding: 10px 20px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-adicionar:hover {
+    background-color: #0099cc;
+}

@@ -171,15 +171,17 @@ else if ($acao === "remover") {
 
         echo json_encode(['Resposta' => true, 'msg' => "Item removido"]);
         exit;
+
+
+        echo json_encode(['Resposta' => false, 'msg' => "Ação inválida"]);
+        exit;
+    
+    break;    
     }
 
-    echo json_encode(['Resposta' => false, 'msg' => "Ação inválida"]);
-    exit;
-
-break;
 
 // PAGAR / FINALIZAR COMPRA
-if ($acao === "pagar") {
+else if ($acao === "pagar") {
 
     $idCarrinho = $_SESSION['id_carrinho'];
 

@@ -1,0 +1,133 @@
+/* ==================== INÍCIO ==================== */
+
+.topo { 
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1%;
+    gap: 2%;
+    background-color: #c5fafa;
+}
+
+
+a, a:visited, a:hover, a:active {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* LOGIN */
+.topo .login i {
+     font-size: 35px;
+    color: #000;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.topo .login i:hover {
+    transform: scale(1.2);
+    color: #00bfff;
+}
+
+/* Nome da farmácia */
+.topo .nome h1 {
+    display: flex;
+    margin: 0;
+    font-size: 500%;
+}
+
+/* ---------- BARRA DE PESQUISA + LUPA ---------- */
+.CaixaP {
+    display: flex;
+    align-items: center;
+    background-color: #e0f7f7;
+    border: 2px solid #000;
+    border-radius: 100px;
+    padding: 5px 15px;
+    width: 320px;
+}
+
+#barraP {
+    flex: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 20px;
+}
+
+/* Retira efeitos padrão */
+#barraP:focus,
+#barraP:hover {
+    border: none;
+    box-shadow: none;
+}
+
+.lupa {
+    font-size: 35px;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* CARRINHO */
+.carrinho i {
+    font-size: 35px;
+    color: #000;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.carrinho i:hover {
+    transform: scale(1.2);
+    color: #00bfff;
+}
+
+/* ==================== MEIO ==================== */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #eefdfd; /* cor tema */
+}
+
+.INDEimagens {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 2.5%;
+    padding: 0.5%;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.INDEimagens::-webkit-scrollbar {
+    display: none;
+}
+
+.INDEimagens > div {
+    flex: 0 0 auto;
+    text-align: center;
+}
+
+.INDEimagens > div a img {
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.INDEimagens > div a img:hover {
+    transform: scale(1.07);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+.INDEimagens > div p {
+    margin-top: 10%;
+    font-size: 19px;
+    color: black;
+}
+
+/* ==================== FUNDO ==================== */

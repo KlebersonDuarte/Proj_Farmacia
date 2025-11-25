@@ -1,0 +1,231 @@
+/* Estilos para página de detalhe do produto */
+:root{
+	--primary: #00bfff; /* cor principal (hover/links) */
+	--accent-bg: #c5fafa; /* cor de destaque de topo */
+	--muted: #f6f6f6;
+	--text: #000000;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+.topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: var(--accent-bg);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    gap: 20px;
+}
+
+.topo .nome h2 {
+    margin: 0;
+    font-size: 24px;
+    color: var(--text);
+}
+
+.topo .nome a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.topo .pesquisa {
+    flex: 1;
+    max-width: 400px;
+}
+
+.topo .pesquisa input {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.topo .login {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.topo .login a {
+    text-decoration: none;
+    color: var(--text);
+    cursor: pointer;
+}
+
+.topo .login p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.topo .login button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.topo .carrinho a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: var(--text);
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.topo .carrinho a:hover {
+    transform: scale(1.2);
+    color: var(--primary);
+}
+
+main {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.produto-detalhado {
+    display: flex;
+    gap: 40px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 30px;
+}
+
+.produto-detalhado .imagem {
+    flex: 1;
+    text-align: center;
+}
+
+.produto-detalhado .imagem img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.produto-detalhado .detalhes {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.produto-detalhado h1 {
+    font-size: 28px;
+    color: #333;
+    margin: 0;
+    font-weight: bold;
+}
+
+.produto-detalhado .marca {
+    color: #666;
+    font-size: 14px;
+    margin: 0;
+}
+
+.produto-detalhado .preco {
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--primary);
+    margin: 10px 0;
+}
+
+.produto-detalhado .descricao {
+    color: #555;
+    line-height: 1.6;
+    margin: 10px 0;
+}
+
+.produto-detalhado .opcoes {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.produto-detalhado .quantidade-controle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+.produto-detalhado .btn-qtd {
+    background-color: #f0f0f0;
+    border: none;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.produto-detalhado .btn-qtd:hover {
+    background-color: #e0e0e0;
+}
+
+.produto-detalhado .qtd-valor {
+    min-width: 40px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.produto-detalhado .btn-adicionar {
+    padding: 12px 30px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.produto-detalhado .btn-adicionar:hover {
+    background-color: #0099cc;
+}
+
+@media (max-width: 768px) {
+    .produto-detalhado {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .topo {
+        flex-wrap: wrap;
+    }
+
+    .topo .pesquisa {
+        max-width: 100%;
+    }
+
+    .produto-detalhado .preco {
+        font-size: 24px;
+    }
+
+    .produto-detalhado h1 {
+        font-size: 22px;
+    }
+
+    .produto-detalhado .opcoes {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

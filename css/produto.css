@@ -1,0 +1,246 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #eefdfd; /* cor tema */
+}
+
+/* ==================== INÍCIO ==================== */
+
+.topo { 
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1%;
+    gap: 2%;
+    background-color: #c5fafa;
+}
+
+
+a, a:visited, a:hover, a:active {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* LOGIN */
+.topo .login i {
+     font-size: 35px;
+    color: #000;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.topo .login i:hover {
+    transform: scale(1.2);
+    color: #00bfff;
+}
+
+/* Nome da farmácia */
+.topo .nome h1 {
+    display: flex;
+    margin: 0;
+    font-size: 500%;
+    color: #000;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+.topo .nome h1:hover {
+    transform: scale(1.2);
+    color: #00bfff;
+}
+
+/* ---------- BARRA DE PESQUISA + LUPA ---------- */
+.CaixaP {
+    display: flex;
+    align-items: center;
+    background-color: #e0f7f7;
+    border: 2px solid #000;
+    border-radius: 100px;
+    padding: 5px 15px;
+    width: 320px;
+}
+
+#barraP {
+    flex: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 20px;
+}
+
+/* Retira efeitos padrão */
+#barraP:focus,
+#barraP:hover {
+    border: none;
+    box-shadow: none;
+}
+
+.lupa {
+    font-size: 35px;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* CARRINHO */
+.carrinho i {
+    font-size: 35px;
+    color: #000;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.carrinho i:hover {
+    transform: scale(1.2);
+    color: #00bfff;
+}
+
+
+
+.produtos-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+
+.produto {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    padding: 15px;
+}
+
+
+.produto img {
+    width: 70%;
+    height: auto;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.produto img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+
+.descricao h3 {
+    margin: 5px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.descricao p {
+    margin: 3px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.preco {
+    font-weight: bold;
+    color: #000;
+    font-size: 16px;
+}
+
+
+.descricao button {
+    margin-top: 10px;
+    padding: 8px 15px;
+    background-color: #00bfff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.descricao button:hover {
+    background-color: #0099cc;
+}
+
+
+/* BOTÃO DO MENU */
+
+
+#menu-toggle {
+  display: none;
+}
+
+.menu-btn {
+  position: fixed;
+  top:1%;
+  left: 95%;
+  width: 3%;
+  height: 5%;
+  cursor: pointer;
+  z-index: 1002;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.menu-btn span {
+  display: block;
+  height: 15%;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.slide-menu {
+  position: fixed;
+  top: 0;
+  right: -250px;
+  width: 250px;
+  height: 100%;
+  background:#c5fafa;
+  color: #00bfff;
+  transition: left 0.3s ease;
+  padding-top: 40px;
+  z-index: 1001;
+}
+
+.slide-menu ul, li {
+  padding: 15px 20px;
+}
+
+.slide-menu ul, li:hover {
+  background: #ffffff;
+
+}
+
+.slide-menu li a {
+  text-decoration: none;
+  color: #00bfff;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+}
+
+#menu-toggle:checked ~ .slide-menu {
+  right: 0;
+}
+
+#menu-toggle:checked ~ .overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+

@@ -3,146 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/produto.css">
-    <title>Farmácia - Produtos</title>
+    <title>Farmácia - Equipamentos Médicos</title>
 </head>
 <body>
 
     <!-- HEADER -->
     <header class="topo">
         <div class="nome">
-            <h2>HealthFarms</h2>
+            <a href="index.php"><h1><></h1></a>
         </div>
 
         <div class="pesquisa">
-            <input type="text" id="barraP" placeholder="Pesquisar...">
+            <div class="CaixaP">
+                <input name="barraP" type="text" id="barraP" autocomplete="off" placeholder="pesquisa">
+                <div class="lupa">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+            </div>
         </div>
 
         <div class="login">
-            <a href="login.php"><p>Login</p></a>
+            <a href="login.php">
+                <i class="fa-solid fa-user"></i>
+            </a>
+        </div>
+
+        <div class="carrinho">
+            <a href="carrinho.php"><i class="fa-solid fa-cart-shopping"></i></a>
         </div>
     </header>
+
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" class="menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </label>
+
+    <div class="slide-menu">
+        <ul>
+            <li><a href="index.php">Início</a></li>
+            <li><a href="bebes.php">Produtos para bebês</a></li>
+            <li><a href="cosmedicos.php">Cosmédicos</a></li>
+            <li><a href="descontos.php">Descontos</a></li>
+            <li><a href="equipamentos.php">Equipamentos médicos</a></li>
+            <li><a href="higiene.php">Higiene</a></li>
+            <li><a href="perfumes.php">Perfumes</a></li>
+            <li><a href="remedios.php">Remédios</a></li>
+            <li><a href="saudesex.php">Saúde sexual</a></li>
+            <li><a href="socorros.php">Primeiros socorros</a></li>
+            <li><a href="vitaminas.php">Vitaminas e minerais</a></li>
+        </ul>
+    </div>
 
     <!-- MAIN: produtos -->
     <main>
         <div class="produtos-container">
 
+            <!-- 1 -->
             <div class="produto">
-                <img src="img/INDEcomprimidos.jpeg" alt="Comprimidos">
+                <img src="img/estetoscopio.jpeg" alt="">
                 <div class="descricao">
-                    <h3>Comprimidos XYZ</h3>
-                    <p>Marca ABC</p>
-                    <p class="preco">R$ 12,99</p>
+                    <h3>Estetoscópio Littmann Classic III</h3>
+                    <p>Ausculta cardíaca e pulmonar com alta precisão</p>
+                    <p class="preco">R$ 499,90</p>
                     <button>Comprar</button>
                 </div>
             </div>
 
+            <!-- 2 -->
             <div class="produto">
-                <img src="img/INDEcreme.jpeg" alt="Creme Hidratante">
+                <img src="img/termometro_infravermelho.jpeg" alt="">
                 <div class="descricao">
-                    <h3>Creme Hidratante</h3>
-                    <p>Marca DEF</p>
-                    <p class="preco">R$ 24,50</p>
+                    <h3>Termômetro Digital Infravermelho</h3>
+                    <p>Medicação rápida e sem contato da temperatura corporal</p>
+                    <p class="preco">R$ 129,90</p>
                     <button>Comprar</button>
                 </div>
             </div>
 
+            <!-- 3 -->
             <div class="produto">
-                <img src="img/INDEsabonete.jpeg" alt="Sabonete Líquido">
+                <img src="img/esfigmomanometro.jpeg" alt="">
                 <div class="descricao">
-                    <h3>Sabonete Líquido</h3>
-                    <p>Marca GHI</p>
-                    <p class="preco">R$ 8,75</p>
+                    <h3>Esfigmomanômetro Manual Premium</h3>
+                    <p>Medição de pressão arterial com manguito ajustável</p>
+                    <p class="preco">R$ 199,90</p>
                     <button>Comprar</button>
                 </div>
             </div>
 
+            <!-- 4 -->
             <div class="produto">
-                <img src="img/INDEchupeta.jpeg" alt="Chupeta Bebê">
+                <img src="img/oximetro.jpeg" alt="">
                 <div class="descricao">
-                    <h3>Chupeta Bebê</h3>
-                    <p>Marca JKL</p>
-                    <p class="preco">R$ 15,00</p>
+                    <h3>Oxímetro de Pulso Fingertip</h3>
+                    <p>Mede saturação de oxigênio e frequência cardíaca</p>
+                    <p class="preco">R$ 149,90</p>
                     <button>Comprar</button>
                 </div>
             </div>
 
+            <!-- 5 -->
             <div class="produto">
-                <img src="img/INDEsocorros.jpeg" alt="Kit Primeiros Socorros">
+                <img src="img/balanca_digital.jpeg" alt="">
                 <div class="descricao">
-                    <h3>Kit Primeiros Socorros</h3>
-                    <p>Marca MNO</p>
-                    <p class="preco">R$ 35,00</p>
+                    <h3>Balança Digital de Precisão Clínica</h3>
+                    <p>Peso corporal preciso com capacidade de até 200kg</p>
+                    <p class="preco">R$ 349,90</p>
                     <button>Comprar</button>
                 </div>
             </div>
 
+            <!-- 6 -->
             <div class="produto">
-                <img src="img/INDEseringa.jpeg" alt="Seringa">
+                <img src="img/aparelho_ultrassom.jpeg" alt="">
                 <div class="descricao">
-                    <h3>Seringa Descartável</h3>
-                    <p>Marca PQR</p>
-                    <p class="preco">R$ 5,50</p>
+                    <h3>Aparelho de Ultrassom Portátil</h3>
+                    <p>Imagens médicas em tempo real para diagnósticos rápidos</p>
+                    <p class="preco">R$ 4.990,00</p>
                     <button>Comprar</button>
                 </div>
             </div>
 
+            <!-- 7 -->
             <div class="produto">
-                <img src="img/INDEvitaminas.jpeg" alt="Vitaminas">
+                <img src="img/nebulizador.jpeg" alt="">
                 <div class="descricao">
-                    <h3>Vitaminas ABC</h3>
-                    <p>Marca STU</p>
-                    <p class="preco">R$ 22,00</p>
+                    <h3>Nebulizador Inalatório Elétrico</h3>
+                    <p>Facilita aplicação de medicamentos respiratórios</p>
+                    <p class="preco">R$ 249,90</p>
                     <button>Comprar</button>
                 </div>
             </div>
 
+            <!-- 8 -->
             <div class="produto">
-                <img src="img/INDEsaudesex.jpeg" alt="Saúde Sexual">
+                <img src="img/instrumentos_cirurgicos.jpeg" alt="">
                 <div class="descricao">
-                    <h3>Preservativos</h3>
-                    <p>Marca VWX</p>
-                    <p class="preco">R$ 18,99</p>
+                    <h3>Conjunto de Instrumentos Cirúrgicos</h3>
+                    <p>Kit completo para procedimentos médicos</p>
+                    <p class="preco">R$ 899,90</p>
                     <button>Comprar</button>
                 </div>
             </div>
 
+            <!-- 9 -->
             <div class="produto">
-                <img src="img/INDEperfume.jpeg" alt="Perfume Floral">
+                <img src="img/mascara_ambu.jpeg" alt="">
                 <div class="descricao">
-                    <h3>Perfume Floral</h3>
-                    <p>Marca YZA</p>
-                    <p class="preco">R$ 55,00</p>
+                    <h3>Máscara de Ventilação Ambu</h3>
+                    <p>Máscara para ressuscitação manual em emergências</p>
+                    <p class="preco">R$ 179,90</p>
                     <button>Comprar</button>
                 </div>
             </div>
 
+            <!-- 10 -->
             <div class="produto">
-                <img src="img/INDEdescontos.jpeg" alt="Kit Desconto">
+                <img src="img/bisturi_eletrico.jpeg" alt="">
                 <div class="descricao">
-                    <h3>Kit Desconto</h3>
-                    <p>Marca BCD</p>
-                    <p class="preco">R$ 40,00</p>
+                    <h3>Bisturi Elétrico Portátil</h3>
+                    <p>Corte preciso com coagulação simultânea</p>
+                    <p class="preco">R$ 1.299,90</p>
                     <button>Comprar</button>
                 </div>
             </div>
 
+            <!-- 11 -->
             <div class="produto">
-                <img src="img/INDEcomprimidos.jpeg" alt="Comprimidos DEF">
+                <img src="img/lampada_cirurgica.jpeg" alt="">
                 <div class="descricao">
-                    <h3>Comprimidos DEF</h3>
-                    <p>Marca EFG</p>
-                    <p class="preco">R$ 13,50</p>
+                    <h3>Lâmpada Cirúrgica LED de Mesa</h3>
+                    <p>Iluminação intensa e focada para procedimentos</p>
+                    <p class="preco">R$ 1.199,90</p>
                     <button>Comprar</button>
                 </div>
             </div>
 
+            <!-- 12 -->
             <div class="produto">
-                <img src="img/INDEcreme.jpeg" alt="Creme Noturno">
+                <img src="img/desfibrilador_aed.jpeg" alt="">
                 <div class="descricao">
-                    <h3>Creme Noturno</h3>
-                    <p>Marca HIJ</p>
-                    <p class="preco">R$ 27,00</p>
+                    <h3>Desfibrilador Automático AED</h3>
+                    <p>Aplicação de choque seguro para emergência cardíaca</p>
+                    <p class="preco">R$ 3.999,90</p>
+                    <button>Comprar</button>
+                </div>
+            </div>
+
+            <!-- 13 -->
+            <div class="produto">
+                <img src="img/aparelho_ecg.jpeg" alt="">
+                <div class="descricao">
+                    <h3>Aparelho de Eletrocardiograma (ECG)</h3>
+                    <p>Registro elétrico da atividade cardíaca</p>
+                    <p class="preco">R$ 2.499,90</p>
+                    <button>Comprar</button>
+                </div>
+            </div>
+
+            <!-- 14 -->
+            <div class="produto">
+                <img src="img/cadeira_rodas.jpeg" alt="">
+                <div class="descricao">
+                    <h3>Cadeira de Rodas Dobrável</h3>
+                    <p>Confortável e portátil para transporte de pacientes</p>
+                    <p class="preco">R$ 599,90</p>
+                    <button>Comprar</button>
+                </div>
+            </div>
+
+            <!-- 15 -->
+            <div class="produto">
+                <img src="img/termometro_clinico.jpeg" alt="">
+                <div class="descricao">
+                    <h3>Termômetro Clínico Digital de Testa</h3>
+                    <p>Medição rápida e precisa da temperatura corporal</p>
+                    <p class="preco">R$ 89,90</p>
                     <button>Comprar</button>
                 </div>
             </div>
